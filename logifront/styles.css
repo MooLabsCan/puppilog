@@ -1,0 +1,304 @@
+/* Puppy Litter Tracker - Gorgeous UI */
+:root{
+  --bg:#0f1222;
+  --card:#161935;
+  --muted:#9aa3b2;
+  --text:#e8ecf4;
+  --accent:#ff6fb3;
+  --accent-2:#8fd3ff;
+  --good:#5ee7a1;
+  --warn:#ffd166;
+  --danger:#ff6b6b;
+  --ring: 0 0 0 3px color-mix(in oklab, var(--accent), transparent 70%);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 80% -10%, #1e2148, transparent),
+              radial-gradient(900px 600px at -10% 100%, #1a2337, transparent),
+              var(--bg);
+  color:var(--text);
+}
+.header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; position:sticky; top:0; backdrop-filter: blur(8px);
+  background: linear-gradient( to bottom, rgba(15,18,34,.9), rgba(15,18,34,.6));
+  border-bottom:1px solid rgba(255,255,255,.06);
+  z-index:50;
+}
+.brand{display:flex; align-items:center; gap:14px}
+.brand img{width:42px; height:42px}
+.brand .title{font-size:20px; font-weight:700; letter-spacing:.4px}
+.header .actions{display:flex; gap:10px}
+.button{
+  appearance:none; border:none; padding:10px 14px; border-radius:12px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent), white 8%), var(--accent));
+  box-shadow: 0 10px 20px rgba(255,111,179,.25);
+  color:#231b2a; font-weight:700; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+}
+.button:hover{transform:translateY(-1px); filter: brightness(1.04)}
+.button.secondary{
+  background: #22264b; color: var(--text); box-shadow:none; border:1px solid rgba(255,255,255,.08);
+}
+.container{max-width:1100px; margin:24px auto; padding:0 20px;}
+.grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:16px}
+@media (max-width: 920px){ .grid{grid-template-columns:1fr} }
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius:20px; padding:18px; box-shadow: 0 4px 24px rgba(0,0,0,.25);
+}
+.card h2{margin:0 0 10px 0; font-size:18px}
+.muted{color:var(--muted)}
+.row{display:flex; gap:12px; flex-wrap:wrap}
+.input{display:flex; flex-direction:column; gap:8px; flex:1; min-width:180px}
+.input label{font-size:12px; color:var(--muted)}
+.input input, .input select, .input textarea{
+  width:100%; padding:12px 12px; border-radius:12px; background:#0f1330; color:var(--text);
+  border:1px solid rgba(255,255,255,.12); outline:none;
+}
+.input input:focus, .input textarea:focus{box-shadow: var(--ring);}
+.kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px;}
+.kpi{background:#0e1430; border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:14px}
+.kpi .label{font-size:11px; color:var(--muted)}
+.kpi .value{font-size:22px; font-weight:800; margin-top:6px}
+.list{display:flex; flex-direction:column; gap:10px; margin-top:10px}
+.puppy{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px; border-radius:14px; background:#0c1230; border:1px solid rgba(255,255,255,.08)}
+.badge{font-size:12px; padding:6px 10px; border-radius:999px; background:#22305c; color:#b7cffb}
+/* Modal */
+.modal-backdrop{position:fixed; inset:0; background: rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:100}
+.modal{width:min(720px, 92vw); background: #101433; border:1px solid rgba(255,255,255,.1); border-radius:20px; overflow:hidden; box-shadow: 0 30px 60px rgba(0,0,0,.35)}
+.modal header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08)}
+.modal main{padding:18px}
+.step-indicator{display:flex; gap:6px}
+.step-dot{width:8px; height:8px; border-radius:999px; background:#2a325c; opacity:.6}
+.step-dot.active{background: var(--accent-2); opacity:1}
+.modal footer{display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-top:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02)}
+footer .left, footer .right{display:flex; gap:10px; align-items:center}
+hr.sep{border:none; height:1px; background: linear-gradient(to right, rgba(255,255,255,.04), rgba(255,255,255,.15), rgba(255,255,255,.04)); margin:12px 0}
+.small{font-size:12px}
+.logo-xl{width:90px; height:90px}
+.empty{display:flex; align-items:center; justify-content:center; padding:30px; border:1px dashed rgba(255,255,255,.1); border-radius:16px; color:var(--muted)}
+.alert{padding:10px 12px; border-radius:12px; background:#0e1732; border:1px solid rgba(255,255,255,.08); color:#b7cffb}
+
+/* Clickable card affordance for collapsible areas */
+.collapsible{ cursor:pointer; }
+.collapsible:hover{ outline:1px solid rgba(255,255,255,.08); outline-offset:-4px; }
+/* Puppy Litter Tracker - Gorgeous UI */
+:root{
+  --bg:#0f1222;
+  --card:#161935;
+  --muted:#9aa3b2;
+  --text:#e8ecf4;
+  --accent:#ff6fb3;
+  --accent-2:#8fd3ff;
+  --good:#5ee7a1;
+  --warn:#ffd166;
+  --danger:#ff6b6b;
+  --ring: 0 0 0 3px color-mix(in oklab, var(--accent), transparent 70%);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  background: radial-gradient(1200px 800px at 80% -10%, #1e2148, transparent),
+              radial-gradient(900px 600px at -10% 100%, #1a2337, transparent),
+              var(--bg);
+  color:var(--text);
+}
+.header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 28px; position:sticky; top:0; backdrop-filter: blur(8px);
+  background: linear-gradient( to bottom, rgba(15,18,34,.9), rgba(15,18,34,.6));
+  border-bottom:1px solid rgba(255,255,255,.06);
+  z-index:50;
+}
+.brand{display:flex; align-items:center; gap:14px}
+.brand img{width:42px; height:42px}
+.brand .title{font-size:20px; font-weight:700; letter-spacing:.4px}
+.header .actions{display:flex; gap:10px}
+.button{
+  appearance:none; border:none; padding:10px 14px; border-radius:12px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent), white 8%), var(--accent));
+  box-shadow: 0 10px 20px rgba(255,111,179,.25);
+  color:#231b2a; font-weight:700; cursor:pointer; transition: transform .08s ease, box-shadow .2s ease, filter .2s ease;
+}
+.button:hover{transform:translateY(-1px); filter: brightness(1.04)}
+.button.secondary{
+  background: #22264b; color: var(--text); box-shadow:none; border:1px solid rgba(255,255,255,.08);
+}
+.container{max-width:1100px; margin:24px auto; padding:0 20px;}
+.grid{display:grid; grid-template-columns: 1.1fr .9fr; gap:16px}
+@media (max-width: 920px){ .grid{grid-template-columns:1fr} }
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius:20px; padding:18px; box-shadow: 0 4px 24px rgba(0,0,0,.25);
+}
+.card h2{margin:0 0 10px 0; font-size:18px}
+.muted{color:var(--muted)}
+.row{display:flex; gap:12px; flex-wrap:wrap}
+.input{display:flex; flex-direction:column; gap:8px; flex:1; min-width:180px}
+.input label{font-size:12px; color:var(--muted)}
+.input input, .input select, .input textarea{
+  width:100%; padding:12px 12px; border-radius:12px; background:#0f1330; color:var(--text);
+  border:1px solid rgba(255,255,255,.12); outline:none;
+}
+.input input:focus, .input textarea:focus{box-shadow: var(--ring);}
+.kpis{display:grid; grid-template-columns: repeat(4,1fr); gap:12px;}
+.kpi{background:#0e1430; border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:14px}
+.kpi .label{font-size:11px; color:var(--muted)}
+.kpi .value{font-size:22px; font-weight:800; margin-top:6px}
+.list{display:flex; flex-direction:column; gap:10px; margin-top:10px}
+.puppy{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:12px; border-radius:14px; background:#0c1230; border:1px solid rgba(255,255,255,.08)}
+.badge{font-size:12px; padding:6px 10px; border-radius:999px; background:#22305c; color:#b7cffb}
+/* Modal */
+.modal-backdrop{position:fixed; inset:0; background: rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:100}
+.modal{width:min(720px, 92vw); background: #101433; border:1px solid rgba(255,255,255,.1); border-radius:20px; overflow:hidden; box-shadow: 0 30px 60px rgba(0,0,0,.35)}
+.modal header{display:flex; align-items:center; justify-content:space-between; padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.08)}
+.modal main{padding:18px}
+.step-indicator{display:flex; gap:6px}
+.step-dot{width:8px; height:8px; border-radius:999px; background:#2a325c; opacity:.6}
+.step-dot.active{background: var(--accent-2); opacity:1}
+.modal footer{display:flex; justify-content:space-between; align-items:center; padding:14px 16px; border-top:1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.02)}
+footer .left, footer .right{display:flex; gap:10px; align-items:center}
+hr.sep{border:none; height:1px; background: linear-gradient(to right, rgba(255,255,255,.04), rgba(255,255,255,.15), rgba(255,255,255,.04)); margin:12px 0}
+.small{font-size:12px}
+.logo-xl{width:90px; height:90px}
+.empty{display:flex; align-items:center; justify-content:center; padding:30px; border:1px dashed rgba(255,255,255,.1); border-radius:16px; color:var(--muted)}
+.alert{padding:10px 12px; border-radius:12px; background:#0e1732; border:1px solid rgba(255,255,255,.08); color:#b7cffb}
+
+/* Clickable card affordance for collapsible areas */
+.collapsible{ cursor:pointer; }
+.collapsible:hover{ outline:1px solid rgba(255,255,255,.08); outline-offset:-4px; }
+
+/* Puppy gallery */
+.gallery{ display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+.gallery-group{ display:flex; flex-direction:column; gap:8px; }
+.gallery-group .g-head{ display:flex; align-items:center; gap:8px; }
+.gallery-group .g-head .date{ font-weight:700; }
+.gallery-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap:8px; }
+.gallery-grid .thumb{ position:relative; padding-top:100%; border-radius:10px; overflow:hidden; background:#0b112b; border:1px solid rgba(255,255,255,.08); }
+.gallery-grid .thumb img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.gallery-grid .thumb .time{ position:absolute; bottom:4px; right:6px; font-size:11px; padding:2px 6px; border-radius:8px; background:rgba(0,0,0,.45); color:#fff; }
+@media (max-width: 800px){ .gallery-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px){ .gallery-grid{ grid-template-columns: repeat(2, 1fr); } }
+
+/* Weight log table */
+.weight-table{ width:100%; border-collapse:separate; border-spacing:0; background:#0c1230; border:1px solid rgba(255,255,255,.08); border-radius:12px; overflow:hidden; }
+.weight-table thead th{ text-align:left; font-size:12px; color:var(--muted); padding:10px 12px; background:#0b112b; border-bottom:1px solid rgba(255,255,255,.08); position:sticky; top:0; }
+.weight-table tbody td{ padding:10px 12px; border-bottom:1px solid rgba(255,255,255,.06); }
+.weight-table tbody tr:last-child td{ border-bottom:none; }
+.weight-table .cell-editable{ cursor:pointer; background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); text-align:center; border-radius:8px; }
+.weight-table .cell-editable:hover{ outline:1px solid rgba(255,255,255,.12); outline-offset:-2px; }
+
+/* Buttons variants */
+.button.tiny{ padding:6px 10px; font-size:12px; border-radius:10px; }
+.button.icon{ padding:8px 10px; min-width:40px; }
+
+/* Mobile utilities */
+.mobile-only{ display:none; }
+@media (max-width: 640px){
+  .mobile-only{ display:block; }
+  /* default collapse weight log on mobile */
+  #pdWeightLog.collapsed{ display:none; }
+}
+
+/* Puppy avatar icon */
+.puppy .avatar { display:flex; align-items:center; justify-content:center; width:48px; height:48px; flex:0 0 48px; }
+.puppy .avatar svg{ width:44px; height:44px; display:block; }
+
+/* Modal header dynamic avatar sizing */
+.logo-xl svg{ width:90px; height:90px; display:block; }
+
+/* Mobile-first cute glossy refresh and overflow safety */
+
+/* Palette tweaks for a deeper yet playful look */
+:root{
+  --bg:#0e1024;        /* deeper backdrop */
+  --card:#15183a;      /* richer cards */
+  --muted:#a7b0c2;
+  --text:#eff3fb;
+  --accent:#ff7fbf;    /* pinker accent */
+  --accent-2:#9bddff;  /* aqua highlight */
+  --good:#65f0ad;
+  --warn:#ffe08a;
+  --danger:#ff7a7a;
+  --ring: 0 0 0 3px color-mix(in oklab, var(--accent), transparent 68%);
+}
+
+/* Prevent any horizontal scrolling */
+html, body { overflow-x: hidden; }
+img, svg { max-width:100%; height:auto; }
+
+/* Container and grid safe spacing for phones */
+.container{ max-width: 980px; padding-left: 16px; padding-right: 16px; }
+@media (max-width: 640px){
+  .container{ padding-left: 12px; padding-right: 12px; }
+}
+
+/* Header: wrap actions on small screens to avoid overflow */
+.header{ gap:12px; }
+.header .actions{ display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+@media (max-width: 640px){
+  .brand img{ width:34px; height:34px; }
+  .brand .title{ font-size:18px; }
+  .header{ padding:14px 14px; }
+}
+
+/* Buttons: extra glossy and tactile states */
+.button{
+  border-radius:14px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent), white 14%), var(--accent));
+  box-shadow: 0 10px 24px rgba(255,127,191,.28), inset 0 0 0 1px rgba(255,255,255,.15);
+}
+.button:active{ transform: translateY(1px) scale(.99); filter:none; }
+.button.secondary{
+  background: linear-gradient(180deg, #242a5a, #1d2350);
+  border:1px solid rgba(255,255,255,.10);
+}
+
+/* Cards: more gloss */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+}
+
+/* Puppy rows wrap nicely on phone */
+.puppy{ align-items:flex-start; }
+.puppy > div{ min-width:0; }
+.puppy .badge{ white-space:nowrap; }
+
+/* KPIs: stack on narrow view to avoid scroll */
+@media (max-width: 640px){
+  .kpis{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Weight table: ensure it fits portrait width */
+.weight-table{ table-layout:auto; max-width:100%; }
+@media (max-width: 640px){
+  .weight-table thead th, .weight-table tbody td{ padding:8px 10px; font-size:13px; }
+}
+
+/* Modal: bottom sheet style on phones to keep everything in portrait without overflow */
+@media (max-width: 640px){
+  .modal-backdrop{ align-items: flex-end; padding-bottom: env(safe-area-inset-bottom); }
+  .modal{
+    width:100vw; max-width:100vw; height:92vh; max-height:92vh; border-radius:16px 16px 0 0;
+  }
+  .modal header{ position:sticky; top:0; background: rgba(16,20,51,.96); backdrop-filter: blur(8px); z-index:1; }
+  .modal footer{ position:sticky; bottom:0; background: rgba(16,20,51,.96); backdrop-filter: blur(8px); z-index:1; }
+  .modal main{ padding-bottom:16px; max-height: calc(92vh - 120px); overflow:auto; }
+}
+
+/* Inputs: friendlier radius and subtle glow */
+.input input, .input select, .input textarea{
+  border-radius:14px; background:#0e1336;
+  border:1px solid rgba(255,255,255,.14);
+}
+.input input:focus, .input textarea:focus, .input select:focus{ box-shadow: var(--ring); }
+
+/* Safe-area padding for iOS at the page level */
+body{ padding-bottom: env(safe-area-inset-bottom); }

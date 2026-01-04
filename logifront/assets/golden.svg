@@ -1,0 +1,58 @@
+<svg width="400" height="340" viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
+    <!-- Collar (pink with subtle glow/highlight) -->
+    <ellipse cx="200" cy="260" rx="120" ry="38" fill="none" stroke="#ff69b4" stroke-width="22"/>
+    <ellipse cx="200" cy="260" rx="120" ry="38" fill="none" stroke="#ff1493" stroke-width="10" opacity="0.75"/>
+
+    <!-- Buckle / ring connector -->
+    <circle cx="295" cy="260" r="20" fill="#d0d0d0"/>
+    <circle cx="295" cy="260" r="14" fill="#a8a8a8"/>
+    <circle cx="295" cy="260" r="7" fill="#f0f0f0"/>
+
+    <!-- Bone tag -->
+    <g transform="translate(285, 278)">
+        <path d="M 0 0 Q 18 -24 36 0 Q 54 24 36 48 Q 18 72 0 48 Q -18 24 0 0 Z" fill="#d4a017" stroke="#b8860b" stroke-width="4"/>
+        <text x="18" y="30" font-family="Arial, sans-serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">B</text>
+    </g>
+
+    <!-- Head base (golden fur) -->
+    <ellipse cx="200" cy="160" rx="105" ry="115" fill="#f4d3a0"/>
+
+    <!-- Fluffy ears -->
+    <ellipse cx="110" cy="120" rx="60" ry="85" fill="#e8b670" transform="rotate(33 120 110)"/>
+    <ellipse cx="290" cy="120" rx="60" ry="85" fill="#e8b670" transform="rotate(-33 280 110)"/>
+    <!-- Inner ear lighter fur -->
+    <ellipse cx="125" cy="115" rx="45" ry="65" fill="#f0c080" transform="rotate(-28 125 115)"/>
+    <ellipse cx="275" cy="115" rx="45" ry="65" fill="#f0c080" transform="rotate(28 275 115)"/>
+
+    <!-- Muzzle -->
+    <ellipse cx="200" cy="220" rx="65" ry="55" fill="#f8e0b0"/>
+    <ellipse cx="200" cy="238" rx="45" ry="35" fill="#f0d090"/>
+
+    <!-- Nose -->
+    <ellipse cx="200" cy="210" rx="20" ry="16" fill="#3c2f2f"/>
+    <ellipse cx="198" cy="207" rx="7" ry="5" fill="#000000" opacity="0.5"/>
+
+    <!-- Eyes (sparkly and happy) -->
+    <circle cx="165" cy="165" r="33" fill="white"/>
+    <circle cx="235" cy="165" r="33" fill="white"/>
+    <circle cx="168" cy="162" r="22" fill="#3c2f2f"/>
+    <circle cx="238" cy="162" r="22" fill="#3c2f2f"/>
+    <!-- Eye shine -->
+    <circle cx="175" cy="155" r="6" fill="white" opacity="0.8"/>
+    <circle cx="245" cy="155" r="6" fill="white" opacity="0.8"/>
+
+    <!-- Happy open mouth with tongue -->
+    <path d="M 175 230 Q 200 275 225 230 Q 245 255 225 290 Q 200 315 175 290 Q 155 255 175 230 Z" fill="#ff9999" stroke="#ff6666" stroke-width="4"/>
+    <path d="M 182 250 Q 200 275 218 250" fill="none" stroke="#ff4444" stroke-width="5" opacity="0.7"/>
+
+    <!-- Fluffy fur highlights on head -->
+    <g stroke="#e8b670" stroke-width="4" opacity="0.6" fill="none">
+        <path d="M 130 80 Q 115 40 140 20"/>
+        <path d="M 270 80 Q 285 40 260 20"/>
+        <path d="M 155 70 Q 170 30 195 50"/>
+        <path d="M 245 70 Q 230 30 205 50"/>
+    </g>
+
+    <!-- Light fur accent on forehead -->
+    <ellipse cx="200" cy="100" rx="45" ry="35" fill="#f8e0c0" opacity="0.5"/>
+</svg>
