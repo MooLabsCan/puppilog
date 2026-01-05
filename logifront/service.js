@@ -2,16 +2,60 @@
 // All methods return promises to mirror async server calls.
 
 (function(global){
-  const BACK_BASE = '../logiback';
+  // Determine backend base URL
+  // Priority:
+  // 1) window.BACK_BASE if explicitly set
+  // 2) If running on puppi.liap.ca (or any subdomain of liap.ca pointing to puppi), use absolute live URL
+  // 3) Fallback to same-origin relative path for local/dev
+  const HOST = (typeof window !== 'undefined' ? window.location.hostname : '');
+  const LIVE_BASE = 'https://puppi.liap.ca/logiback';
+  const BACK_BASE = (typeof window !== 'undefined' && window.BACK_BASE)
+    ? window.BACK_BASE
+    : (HOST && HOST.endsWith('liap.ca') ? LIVE_BASE : '../logiback');
+
+  function readCookie(name){
+    try{
+      const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/\+^])/g,'\\$1') + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    }catch(_){ return '' }
+  }
+
+  function getAuthToken(){
+    try{ const t = localStorage.getItem('authToken'); if (t) return t }catch(_){ }
+    return readCookie('authToken');
+  }
 
   async function checkSession(){
     try{
-      const resp = await fetch(BACK_BASE + '/api/check_session.php', { credentials:'include' });
-      if(!resp.ok) throw new Error('network');
-      return await resp.json();
+      const token = getAuthToken();
+      const resp = await fetch(BACK_BASE + '/api/check_session.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ token })
+      });
+
+      let data = null;
+      try { data = await resp.json(); } catch(_) { data = null }
+
+      if (!resp.ok) {
+        const message = data && (data.message || data.error) ? (data.message || data.error) : ('HTTP ' + resp.status);
+        return { ok:false, status: (data && data.status) || 'error', message };
+      }
+
+      // Normalize success shape with ok flag for callers that expect it
+      if (data && typeof data === 'object') {
+        if (data.status && data.status !== 'authenticated') {
+          // backend conveyed a non-success status but HTTP 200
+          return { ok:false, ...data };
+        }
+        return { ok:true, ...data };
+      }
+
+      return { ok:false, status:'error', message:'Empty response' };
     }catch(e){
-      console.debug('[Service] checkSession skipped:', e.message);
-      return { ok:false };
+      console.debug('[Service] checkSession error:', e.message);
+      return { ok:false, status:'network', message:e.message };
     }
   }
 

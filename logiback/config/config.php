@@ -42,9 +42,9 @@ if ($__host === 'localhost' || preg_match('/\.(local|test)$/i', $__host)) { $ENV
 $ENV_HOST = $__host;
 // Resolve DB credentials (env vars take precedence)
 $DB_HOST = getenv('DB_HOST'); if ($DB_HOST === false || $DB_HOST === 'liap.ca') { $DB_HOST = ($ENV_MODE === 'dev') ? 'localhost' : 'liap.ca'; }
-$DB_NAME = getenv('DB_NAME'); if ($DB_NAME === false || $DB_NAME === 'liapca_curli') { $DB_NAME = ($ENV_MODE === 'dev') ? 'loggi' : 'liapca_loggi'; }
+$DB_NAME = getenv('DB_NAME'); if ($DB_NAME === false || $DB_NAME === 'liapca_loggi') { $DB_NAME = ($ENV_MODE === 'dev') ? 'loggi' : 'liapca_loggi'; }
 $DB_USER = getenv('DB_USER'); if ($DB_USER === false || $DB_USER === 'liapca_moo') { $DB_USER = ($ENV_MODE === 'dev') ? 'root' : 'liapca_moo'; }
-$DB_PASS = getenv('DB_PASS'); if ($DB_PASS === false) { $DB_PASS = ''; }
+$DB_PASS = getenv('DB_PASS'); if ($DB_PASS === false) { $DB_PASS = 'HigherLaws101'; }
 
 // MySQLi connection
 $con = mysqli_connect($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
